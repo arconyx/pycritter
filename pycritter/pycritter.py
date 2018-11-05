@@ -301,12 +301,17 @@ def login(username, password, rememberme=False):
     auth_dict = {'username': username,
                  'password': password,
                  'rememberme': rememberme}
-    token = requests.post(
+    res = requests.post(
         url=_url('/authenticate'),
         headers={'Content-Type': 'application/json'},
         json=auth_dict
-    ).text
-    user_id = get_current_user()['_id']
+    )
+    if res.status_code is 200 or res.status_code is 201:
+        token = res.text
+        user_id = get_current_user()['_id']
+    else:
+        raise APIError('Error {}. The server returned the following message:\n'
+                       '{}'.format(res.status_code, res.text))
 
 
 # The revokeauthentication endpoint seems to only be to clear auth cookies.
