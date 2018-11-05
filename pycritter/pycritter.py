@@ -24,7 +24,7 @@ def _url(path):
 # Creatures
 def get_creature(id):
     return error(requests.get(
-        url=_url('/creatures/' + str(id)),
+        url=_url('/creatures/' + id),
         headers={'x-access-token': token}
     ))
 
@@ -40,7 +40,7 @@ def create_creature(creature):
 
 def update_creature(id, creature):
     return error(requests.put(
-        url=_url('/creatures/' + str(id)),
+        url=_url('/creatures/' + id),
         headers={'x-access-token': token,
                  'Content-Type': 'application/json'},
         body=creature
@@ -49,7 +49,7 @@ def update_creature(id, creature):
 
 def delete_creature(id):
     return error(requests.delete(
-        url=_url('/creatures/' + str(id)),
+        url=_url('/creatures/' + id),
         headers={'x-access-token': token}
     ))
 
@@ -57,14 +57,14 @@ def delete_creature(id):
 # Bestiaries
 def get_bestiary(id):
     return error(requests.get(
-        url=_url('/bestiaries/' + str(id)),
+        url=_url('/bestiaries/' + id),
         headers={'x-access-token': token}
         ))
 
 
 def get_bestiary_creatures(id):
     return error(requests.get(
-        url=_url('/bestiaries/' + str(id) + '/creatures'),
+        url=_url('/bestiaries/' + id + '/creatures'),
         headers={'x-access-token': token}
         ))
 
@@ -88,7 +88,7 @@ def create_bestiary(bestiary):
 def update_bestiary(id, bestiary):
     """bestiary should be JSON as returned by get_bestiary"""
     return error(requests.put(
-        url=_url('/bestiaries/' + str(id)),
+        url=_url('/bestiaries/' + id),
         headers={'x-access-token': token,
                  'Content-Type': 'application/json'},
         body=bestiary
@@ -97,7 +97,7 @@ def update_bestiary(id, bestiary):
 
 def delete_bestiary(id):
     return error(requests.delete(
-        url=_url('/bestiaries/' + str(id)),
+        url=_url('/bestiaries/' + id),
         headers={'x-access-token': token}
         ))
 
@@ -115,28 +115,28 @@ def search_published(query, page=1):
 
 def like(id):
     return error(requests.post(
-        url=_url('publishedbestiaries/' + str(id) + '/likes'),
+        url=_url('publishedbestiaries/' + id + '/likes'),
         headers={'x-access-token': token}
     ))
 
 
 def unlike(id):
     return error(requests.delete(
-        url=_url('publishedbestiaries/' + str(id) + '/likes'),
+        url=_url('publishedbestiaries/' + id + '/likes'),
         headers={'x-access-token': token}
     ))
 
 
 def favorite(id):
     return error(requests.post(
-        url=_url('publishedbestiaries/' + str(id) + '/favorites'),
+        url=_url('publishedbestiaries/' + id + '/favorites'),
         headers={'x-access-token': token}
     ))
 
 
 def unfavorite(id):
     return error(requests.delete(
-        url=_url('publishedbestiaries/' + str(id) + '/favorites'),
+        url=_url('publishedbestiaries/' + id + '/favorites'),
         headers={'x-access-token': token}
     ))
 
@@ -179,7 +179,7 @@ def add_comment(id, comment):
         "author": "user id"
     }"""
     return error(requests.put(
-        url=_url('/publishedbestiaries/' + str(id) + '/comments'),
+        url=_url('/publishedbestiaries/' + id + '/comments'),
         headers={'x-access-token': token,
                  'Content-Type': 'application/json'},
         body=comment
@@ -205,21 +205,21 @@ def delete_comment(bestiary_id, comment_id):
 
 def get_published_creatures(id, page):
     return error(requests.get(
-        url=_url('/publishedbestiaries/' + str(id) + '/creatures')
+        url=_url('/publishedbestiaries/' + id + '/creatures')
         ))
 
 
 def delete_published_creatures(id):
     """Deletes ALL creatures from selected published bestiary."""
     return error(requests.delete(
-        url=_url('/publishedbestiaries/' + str(id)),
+        url=_url('/publishedbestiaries/' + id),
         headers={'x-access-token': token}
         ))
 
 
 def get_published(id):
     return error(requests.get(
-        url=_url('/publishedbestiaries/' + str(id))
+        url=_url('/publishedbestiaries/' + id)
         ))
 
 
@@ -234,7 +234,7 @@ def create_published(bestiary):
 
 def update_published(id, bestiary):
     return error(requests.put(
-        url=_url('/publishedbestiaries' + str(id)),
+        url=_url('/publishedbestiaries' + id),
         headers={'x-access-token': token,
                  'Content-Type': 'application/json'},
         body=bestiary
@@ -243,7 +243,7 @@ def update_published(id, bestiary):
 
 def delete_published(id):
     return error(requests.delete(
-        url=_url('/publishedbestiaries' + str(id)),
+        url=_url('/publishedbestiaries' + id),
         headers={'x-access-token': token}
         ))
 
